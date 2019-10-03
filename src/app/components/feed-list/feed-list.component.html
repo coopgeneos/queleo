@@ -1,0 +1,10 @@
+<div class="col-md-8" style="float: left;">
+	<app-feed-card *ngFor="let feed of feeds" 
+		[feed]="feed" 
+		[hiddenFields]="hiddenFields">
+	</app-feed-card>
+</div>
+
+<div class="col-md-4" style="float: right">
+	<app-feed-filter (updateFilter)="loadFeeds($event)"></app-feed-filter>
+</div>

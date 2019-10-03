@@ -1,0 +1,119 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="background-color: currentColor;">
+  <div class="container">
+    <a class="navbar-brand" [routerLink]="['/feeds']">Noticiómetro</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home
+            <span class="sr-only">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact</a>
+        </li>
+      </ul>
+    </div>
+    <a 
+      *ngIf="afAuth.user | async as user"
+      class="btn btn-primary" 
+      title="logout" 
+      style="float: right; color: white" 
+      (click)="logout()">Salir
+    </a>
+  </div>
+</nav>
+
+<!-- Page Content -->
+<!-- <body> -->
+    <div id="container ">
+        <!-- <ngx-growl></ngx-growl> -->
+        <!-- PARTIALS HERE -->
+        
+      <div class="main-content">
+        <router-outlet></router-outlet>
+      </div>
+        <!-- Include body -->
+    </div>
+  <!--
+  <div class="container"> 
+    <div class="row">
+      <app-feed-list></app-feed-list>
+
+      <div class="col-md-4" style="float:right" *ngIf="false">
+        <div class="card my-4">
+          <h5 class="card-header">Agregar rss</h5>
+          <div class="card-body">    
+            <a>Nombre rss</a>
+            <input type="text" class="form-control" id="nombre" [(ngModel)]="nombreRSS"><br>
+    
+            <a>URL rss</a>
+            <input type="text" class="form-control" id="url" [(ngModel)]="urlRSS"><br>
+    
+            <a>URL rss</a>
+            <select id="cat" [(ngModel)]="catRSS">
+              <option *ngFor="let cat of categorias" value="{{cat.nombre}}">
+                {{cat.nombre}}
+              </option>
+            </select>
+            <br>
+            <button type="button" class="btn btn-primary" class="form-control" (click)="agregarRSS()">Guardar</button>
+    
+    
+          </div>
+        </div>
+    
+        <div class="card my-4">
+          <h5 class="card-header">guardar rss</h5>
+          <div class="card-body">
+            <button type="button" class="btn btn-primary" class="form-control"
+              (click)="guardarNoticias()">Guardar</button>
+          </div>
+        </div>
+    
+        <div class="card my-4">
+          <h5 class="card-header">registrar usuario</h5>
+          <div class="card-body">
+            <a>Nombre usuario</a>
+            <input type="text" class="form-control" id="nombre" [(ngModel)]="nombreUsuarioR"><br>
+    
+            <a>password usuario</a>
+            <input type="text" class="form-control" id="url" [(ngModel)]="passwordUsuarioR"><br>
+            <button type="button" class="btn btn-primary" class="form-control"
+              (click)="registrarUsuario()">Guardar</button>
+          </div>
+        </div>
+    
+        <div class="card my-4">
+            <h5 class="card-header">login usuario</h5>
+            <div class="card-body">
+              <a>Nombre usuario</a>
+              <input type="text" class="form-control" id="nombre" [(ngModel)]="nombreUsuarioL"><br>
+    
+              <a>password usuario</a>
+              <input type="text" class="form-control" id="url" [(ngModel)]="passwordUsuarioL"><br>
+              <button type="button" class="btn btn-primary" class="form-control"
+                (click)="loginUsuario()">Guardar</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  -->
+<!-- </body> -->
+
+<!-- Footer -->
+<!-- <footer class="py-5 bg-dark">
+  <div class="container">
+    <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+  </div>
+</footer> -->

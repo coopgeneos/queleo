@@ -1,0 +1,74 @@
+<!-- Order Widget -->
+<div class="card my-4">
+  <h5 class="card-header">Orden cronológico</h5>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-12">
+        <span>Ordenado {{order}}
+          <button (click)="changeOrder()">Cambiar</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Search Widget -->
+<div class="card my-4">
+  <h5 class="card-header">Filtrar por título</h5>
+  <div class="card-body">
+    <div class="input-group">
+      <input type="text" class="form-control" id="filtro" (input)="filterByTitle($event.target.value)" placeholder="Ingrese texto...">
+    </div>
+  </div>
+</div>
+
+<!-- Sources Widget -->
+<div class="card my-4">
+  <h5 class="card-header">Filtrar por fuentes</h5>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-12">
+        <ul>
+          <li *ngFor="let source of sources; let i = index">           
+            <input type="checkbox" checked="source.selected" class="form-check-input" id="{{source}}" (change)="filterBySource(i, $event.target.checked)">
+            {{source.name}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Categories Widget -->
+<div class="card my-4">
+  <h5 class="card-header">Filtrar por categoría</h5>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-12">
+        <ul>
+          <li *ngFor="let category of categories; let i = index">          
+            <input type="checkbox" checked="category.selected" class="form-check-input" id="{{category}}" (change)="filterByCategory(i, $event.target.checked)">
+            {{category.name}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Hidde fields Widget -->
+<div class="card my-4">
+  <h5 class="card-header">Ocultar campos</h5>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-12">
+        <ul>
+          <li *ngFor="let field of hiddenFields; let i = index">
+            <input type="checkbox" value="false" class="form-check-input" id="{{field}}" (change)="hiddeField(i, $event.target.checked)">
+            {{field.name}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

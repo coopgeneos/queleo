@@ -1,0 +1,15 @@
+<div class="col-md-4" style="float:inherit;">
+  <h5 class="card-header">Creación de usuario</h5>
+  <div class="card-body">
+    <a>E-mail</a>
+    <input type="text" class="form-control" id="email" [(ngModel)]="email"><br>
+    <a>Password</a>
+    <input type="text" class="form-control" id="url" [(ngModel)]="password"><br>
+    <a>Reingrese password</a>
+    <input type="text" class="form-control" id="url" [(ngModel)]="password2"><br>
+    <button type="button" class="btn btn-primary" class="form-control"
+      (click)="createAccount()">Crear cuenta
+    </button>
+  </div>
+  <a style="float: right;" [routerLink]="['/signin']"><i class="fa fa-plus fa-lg"></i>Ya tengo una cuenta</a>
+</div>

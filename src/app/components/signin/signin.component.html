@@ -1,0 +1,29 @@
+<!-- <div *ngIf="afAuth.user | async as user; else showLogin">
+  <h1>Hello {{ user.displayName }}!</h1>
+  <button (click)="logout()">Logout</button>
+</div>
+<ng-template #showLogin>
+  <p>Please login.</p>
+  <button (click)="login()">Login with Google</button>
+</ng-template> -->
+
+<div class="col-md-4" style="float: center;" *ngIf="afAuth.user | async as user; else showLogin">
+  <h1>Hello {{ user.displayName }}!</h1>
+  <button (click)="logout()">Logout</button>
+</div>
+
+<ng-template #showLogin>
+  <div class="col-md-4" style="float:inherit;">
+    <h5 class="card-header">Login de usuario</h5>
+    <div class="card-body">
+      <a>E-mail</a>
+      <input type="text" class="form-control" id="email" [(ngModel)]="email"><br>
+      <a>Password</a>
+      <input type="password" class="form-control" id="url" [(ngModel)]="password"><br>
+      <button type="button" class="btn btn-primary" class="form-control"
+        (click)="login()">Acceder</button>
+    </div>
+    <a style="float: right;" [routerLink]="['/signup']"><i class="fa fa-plus fa-lg"></i>Quiero crear una cuenta</a>
+  </div>
+</ng-template>
+
