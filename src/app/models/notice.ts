@@ -1,4 +1,4 @@
-export class Noticia {
+export class Notice {
     author:string;
     description:string;
     image:string;

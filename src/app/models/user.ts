@@ -1,4 +1,4 @@
-export class Usuario {
+export class User {
     username:string;
     password:string;
     favoritos:any;
