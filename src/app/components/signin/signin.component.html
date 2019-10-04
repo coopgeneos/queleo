@@ -1,19 +1,11 @@
-<!-- <div *ngIf="afAuth.user | async as user; else showLogin">
-  <h1>Hello {{ user.displayName }}!</h1>
-  <button (click)="logout()">Logout</button>
-</div>
-<ng-template #showLogin>
-  <p>Please login.</p>
-  <button (click)="login()">Login with Google</button>
-</ng-template> -->
 
-<div class="col-md-4" style="float: center;" *ngIf="afAuth.user | async as user; else showLogin">
-  <h1>Hello {{ user.displayName }}!</h1>
-  <button (click)="logout()">Logout</button>
+<div class="col-md-4" style="margin: auto;" *ngIf="afAuth.user | async as user; else showLogin">
+  <h1>Ya estas logueado!</h1>
+  <a style="margin: auto;" [routerLink]="['/feeds']"><i class="fa fa-plus fa-lg"></i>Ok... entonces llévame a las noticias</a>
 </div>
 
 <ng-template #showLogin>
-  <div class="col-md-4" style="float:inherit;">
+  <div class="col-md-4" style="margin: auto;">
     <h5 class="card-header">Login de usuario</h5>
     <div class="card-body">
       <a>E-mail</a>

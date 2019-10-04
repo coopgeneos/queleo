@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -11,14 +12,20 @@ export class SignupComponent implements OnInit {
   password: string;
   password2: string;
 
-  constructor(public afAuth: AngularFireAuth) {}
+  constructor(
+    public afAuth: AngularFireAuth, 
+    private router: Router) {}
 
   ngOnInit() {
+    if(this.afAuth.user) {
+      this.router.navigate(["/feeds"]);
+    }
   }
 
   createAccount() : void {
     if(this.password != this.password2) {return alert('Diferent passwords!')}
     this.afAuth.auth.createUserWithEmailAndPassword(this.email, this.password)
+      .then(() => {this.router.navigate(['/feeds']);})
       .catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;

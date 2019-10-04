@@ -35,14 +35,4 @@ export class SigninComponent implements OnInit {
         console.log(error);
       });
   }
-  
-  logout() {
-    this.afAuth.auth.signOut();
-  }
-
-  createAccount() {
-    console.log("creating")
-  }
-  
-
 }

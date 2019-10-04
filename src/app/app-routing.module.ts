@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
+import { hasCustomClaim, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 import { canActivate } from '@angular/fire/auth-guard';
 
 import { FeedListComponent } from './components/feed-list/feed-list.component';

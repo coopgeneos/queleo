@@ -34,83 +34,12 @@
 </nav>
 
 <!-- Page Content -->
-<!-- <body> -->
-    <div id="container ">
-        <!-- <ngx-growl></ngx-growl> -->
-        <!-- PARTIALS HERE -->
-        
-      <div class="main-content">
-        <router-outlet></router-outlet>
-      </div>
-        <!-- Include body -->
-    </div>
-  <!--
-  <div class="container"> 
-    <div class="row">
-      <app-feed-list></app-feed-list>
-
-      <div class="col-md-4" style="float:right" *ngIf="false">
-        <div class="card my-4">
-          <h5 class="card-header">Agregar rss</h5>
-          <div class="card-body">    
-            <a>Nombre rss</a>
-            <input type="text" class="form-control" id="nombre" [(ngModel)]="nombreRSS"><br>
-    
-            <a>URL rss</a>
-            <input type="text" class="form-control" id="url" [(ngModel)]="urlRSS"><br>
-    
-            <a>URL rss</a>
-            <select id="cat" [(ngModel)]="catRSS">
-              <option *ngFor="let cat of categorias" value="{{cat.nombre}}">
-                {{cat.nombre}}
-              </option>
-            </select>
-            <br>
-            <button type="button" class="btn btn-primary" class="form-control" (click)="agregarRSS()">Guardar</button>
-    
-    
-          </div>
-        </div>
-    
-        <div class="card my-4">
-          <h5 class="card-header">guardar rss</h5>
-          <div class="card-body">
-            <button type="button" class="btn btn-primary" class="form-control"
-              (click)="guardarNoticias()">Guardar</button>
-          </div>
-        </div>
-    
-        <div class="card my-4">
-          <h5 class="card-header">registrar usuario</h5>
-          <div class="card-body">
-            <a>Nombre usuario</a>
-            <input type="text" class="form-control" id="nombre" [(ngModel)]="nombreUsuarioR"><br>
-    
-            <a>password usuario</a>
-            <input type="text" class="form-control" id="url" [(ngModel)]="passwordUsuarioR"><br>
-            <button type="button" class="btn btn-primary" class="form-control"
-              (click)="registrarUsuario()">Guardar</button>
-          </div>
-        </div>
-    
-        <div class="card my-4">
-            <h5 class="card-header">login usuario</h5>
-            <div class="card-body">
-              <a>Nombre usuario</a>
-              <input type="text" class="form-control" id="nombre" [(ngModel)]="nombreUsuarioL"><br>
-    
-              <a>password usuario</a>
-              <input type="text" class="form-control" id="url" [(ngModel)]="passwordUsuarioL"><br>
-              <button type="button" class="btn btn-primary" class="form-control"
-                (click)="loginUsuario()">Guardar</button>
-            </div>
-        </div>
-      </div>
-    </div>
+<div id="container ">
+  <div class="col-md-10 main-content" style="margin: auto;">
+    <router-outlet></router-outlet>
   </div>
-  -->
-<!-- </body> -->
-
+</div>
+  
 <!-- Footer -->
 <!-- <footer class="py-5 bg-dark">
   <div class="container">

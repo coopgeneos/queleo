@@ -24,11 +24,7 @@ import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { NgxXml2jsonService } from 'ngx-xml2json';
 
 // Pipes
-import { FilterPipe } from './pipes/filter.pipe';
-import { FavorablePipe } from './pipes/favorable.pipe';
-import { FechaOrdPipe } from './pipes/fecha-ord.pipe';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
-import { TendenciaPipe } from './pipes/tendencia.pipe';
 import { TranslatorPipe } from './pipes/translator.pipe';
 
 import { environment } from '../environments/environment';
@@ -37,12 +33,8 @@ import { environment } from '../environments/environment';
   declarations: [
     AppComponent,
     FeedCardComponent,
-
-    FilterPipe,
     FeedListComponent,
-    FavorablePipe,
-    TendenciaPipe,
-    FechaOrdPipe,  
+ 
     CapitalizePipe,
     TranslatorPipe,
     
@@ -60,7 +52,12 @@ import { environment } from '../environments/environment';
     AngularFireModule.initializeApp(environment.firebase, 'noticion'),
     AngularFireDatabaseModule
   ],
-  providers: [FeedService, AngularFireAuth, AngularFireAuthGuard, NgxXml2jsonService],
+  providers: [
+    FeedService, 
+    AngularFireAuth, 
+    AngularFireAuthGuard, 
+    NgxXml2jsonService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
