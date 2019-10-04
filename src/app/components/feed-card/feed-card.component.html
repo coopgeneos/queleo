@@ -1,27 +1,27 @@
 <div class="card mb-4">
-    <img class="card-img-top"  src="{{feed.image}}" alt="No hay imagen" *ngIf="hiddenFields != null && !hiddenFields.includes('image')">
-    <div class="card-body">
-        <h2 class="card-title" *ngIf="hiddenFields != null && !hiddenFields.includes('title')">{{feed.title}}</h2>
-        <p class="card-text" *ngIf="hiddenFields != null && !hiddenFields.includes('description')">{{feed.description}}</p>
-        <a href="{{feed.link}}" class="{{feed.link}}">Ver más &rarr;</a>
-    </div>
-    <div class="card-footer text-muted" *ngIf="hiddenFields != null && !hiddenFields.includes('data')" >
-        {{feed.author}} - {{feed.pubDate | date:'dd-MM-yyyy'}}
-    </div>
-    <div class="card-footer text-muted" *ngIf="showDatos">
-        <button (click)=agregarFavoritos()>guardar noticia</button>
-    </div>
-    <div *ngIf="user" class="card-footer text-muted" >
-			<li *ngFor="let carp of objectKeys(user.carpetaFav) ">
-				<a>{{user.carpetaFav[carp].nombre}} </a>
-				<input type="checkbox" class="form-check-input"  (click)="seleccionarCarp(carp)">
-			</li>
-    </div>
-    <div  class="card-footer text-muted" *ngIf="user">
-			<li>
-				<a>agregar nueva carpeta </a>
-				<input type="text" class="form-control" id="carpetanueva" [(ngModel)]="carpetaNueva"><br>
-				<button (click)=agregarCarpeta()>agregar noticia</button>
-			</li>
-		</div>
+	<img class="card-img-top" src="{{feed.enclosure ? feed.enclosure.url : null}}" alt="No hay imagen" *ngIf="hiddenFields != null && !hiddenFields.includes('image')">
+	<div class="card-body">
+		<h2 class="card-title" *ngIf="hiddenFields != null && !hiddenFields.includes('title')">{{feed.title}}</h2>
+		<p class="card-text" *ngIf="hiddenFields != null && !hiddenFields.includes('description')">{{feed.description}}</p>
+		<a href="{{feed.link}}" target="_blank" class="{{feed.link}}">Ver más &rarr;</a>
+	</div>
+	<div class="card-footer text-muted" *ngIf="hiddenFields != null && !hiddenFields.includes('data')" >
+		{{feed.creator | capitalize}} - {{feed.pubDate | date:'dd-MM-yyyy'}}
+	</div>
+	<div class="card-footer text-muted" *ngIf="showDatos">
+		<button (click)=agregarFavoritos()>guardar noticia</button>
+	</div>
+	<div *ngIf="user" class="card-footer text-muted" >
+		<li *ngFor="let carp of objectKeys(user.carpetaFav) ">
+			<a>{{user.carpetaFav[carp].nombre}} </a>
+			<input type="checkbox" class="form-check-input"  (click)="seleccionarCarp(carp)">
+		</li>
+	</div>
+	<div  class="card-footer text-muted" *ngIf="user">
+		<li>
+			<a>agregar nueva carpeta </a>
+			<input type="text" class="form-control" id="carpetanueva" [(ngModel)]="carpetaNueva"><br>
+			<button (click)=agregarCarpeta()>agregar noticia</button>
+		</li>
+	</div>
 </div>

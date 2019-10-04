@@ -20,6 +20,8 @@ export class FeedFilterComponent implements OnInit {
     {name:"data", selected: false},
   ];
 
+  timer: NodeJS.Timer;
+
   constructor(private firebaseDB: AngularFireDatabase) { }
 
   ngOnInit() {
@@ -71,33 +73,49 @@ export class FeedFilterComponent implements OnInit {
       filter['hiddenFields'] = hidden_f;
     }
 
-    // console.log("feed-filter", filter)
+    console.log("feed-filter", filter)
     this.updateFilter.emit(filter);
   }
 
   filterByTitle(value: string) : void {
     this.filterTitle = value;
-    this.filter();
+    clearTimeout(this.timer);
+    this.setTimer();
   }
 
   filterByCategory(index: number, selected: boolean) : void {
     this.categories[index].selected = selected;
-    this.filter();
+    clearTimeout(this.timer);
+    this.setTimer();
   }
 
   filterBySource(index: number, selected: boolean) : void {
     this.sources[index].selected = selected;
-    this.filter();
+    clearTimeout(this.timer);
+    this.setTimer();
   }
 
   changeOrder() : void {
     this.order = this.order == "desc" ? "asc" : "desc";
-    this.filter();
+    clearTimeout(this.timer);
+    this.setTimer();
   }
 
   hiddeField(index: number, selected: boolean) : void {
     this.hiddenFields[index].selected = selected;
-    this.filter();
+    clearTimeout(this.timer);
+    this.setTimer();
+  }
+
+  setTimer() : void {
+    this.timer = setTimeout(() => {
+      this.filter();
+    }, 2000);
+  }
+
+  resetTimer() : void {
+    if(this.timer != null)
+      clearTimeout(this.timer)
   }
 
 }

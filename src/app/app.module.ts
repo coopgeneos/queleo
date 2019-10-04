@@ -29,6 +29,7 @@ import { FavorablePipe } from './pipes/favorable.pipe';
 import { FechaOrdPipe } from './pipes/fecha-ord.pipe';
 import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { TendenciaPipe } from './pipes/tendencia.pipe';
+import { TranslatorPipe } from './pipes/translator.pipe';
 
 import { environment } from '../environments/environment';
 
@@ -36,12 +37,15 @@ import { environment } from '../environments/environment';
   declarations: [
     AppComponent,
     FeedCardComponent,
+
     FilterPipe,
     FeedListComponent,
     FavorablePipe,
     TendenciaPipe,
     FechaOrdPipe,  
     CapitalizePipe,
+    TranslatorPipe,
+    
     QuerytestComponent, 
     FeedFilterComponent, 
     SigninComponent, 

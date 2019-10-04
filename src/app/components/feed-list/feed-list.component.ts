@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FeedService } from 'src/app/services/feed.service';
-import { Noticia } from 'src/app/models/noticia';
+import { FeedEntry } from 'src/app/models/feed-entry';
 import { AngularFireDatabase } from 'angularfire2/database';
-import { FeedFilter } from 'src/app/models/feed-filter';
+import { Rss } from 'src/app/models/rss';
 
 @Component({
   selector: 'app-feed-list',
@@ -11,9 +11,9 @@ import { FeedFilter } from 'src/app/models/feed-filter';
 })
 export class FeedListComponent implements OnInit {
 
-  rssList: any[];
-  feeds: Noticia[] = [];
-  filteredFeeds: Noticia[] = [];
+  rssList: Rss[];
+  feeds: FeedEntry[] = [];
+  filteredFeeds: FeedEntry[] = [];
   hiddenFields: string[] = [];
 
   constructor(
@@ -27,7 +27,14 @@ export class FeedListComponent implements OnInit {
   loadRss() {
     this.firebaseDB.list('/rssx').snapshotChanges().subscribe(
       data => {
-        this.rssList = data.map(elem => elem.payload.val());
+        this.rssList = data.map(elem => {
+          let pl = elem.payload.val();
+          return {
+            source: pl['source'],
+            category: pl['category'],
+            url: pl['url']
+          }
+        });
         this.loadFeeds({order: "desc"});
       },
       error => {
@@ -69,7 +76,7 @@ export class FeedListComponent implements OnInit {
     // Busco las noticias
     let all_news = [];
     filteredRSS.forEach(rss => {
-      all_news.push(this.feedService.getFeedContent(rss.url));
+      all_news.push(this.feedService.getFeedContent(rss));
     });
     Promise.all(all_news)
       .then(arrays => {

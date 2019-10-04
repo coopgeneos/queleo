@@ -4,8 +4,8 @@
   <div class="card-body">
     <div class="row">
       <div class="col-lg-12">
-        <span>Ordenado {{order}}
-          <button (click)="changeOrder()">Cambiar</button>
+        <span>{{order == 'desc' ? 'Nuevos al principio' : 'Viejos al principio'}}
+          <button (click)="changeOrder()" style="float: right; font-size: 12px">Cambiar</button>
         </span>
       </div>
     </div>
@@ -31,7 +31,7 @@
         <ul>
           <li *ngFor="let source of sources; let i = index">           
             <input type="checkbox" checked="source.selected" class="form-check-input" id="{{source}}" (change)="filterBySource(i, $event.target.checked)">
-            {{source.name}}
+            {{source.name | capitalize}}
           </li>
         </ul>
       </div>
@@ -48,7 +48,7 @@
         <ul>
           <li *ngFor="let category of categories; let i = index">          
             <input type="checkbox" checked="category.selected" class="form-check-input" id="{{category}}" (change)="filterByCategory(i, $event.target.checked)">
-            {{category.name}}
+            {{category.name | capitalize}}
           </li>
         </ul>
       </div>
@@ -65,7 +65,7 @@
         <ul>
           <li *ngFor="let field of hiddenFields; let i = index">
             <input type="checkbox" value="false" class="form-check-input" id="{{field}}" (change)="hiddeField(i, $event.target.checked)">
-            {{field.name}}
+            {{field.name | translate : 'EN_ES' | capitalize}}
           </li>
         </ul>
       </div>

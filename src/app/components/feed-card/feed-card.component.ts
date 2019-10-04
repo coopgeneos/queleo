@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario';
+import { FeedEntry } from 'src/app/models/feed-entry';
 
 @Component({
   selector: 'app-feed-card',
@@ -9,7 +10,7 @@ import { Usuario } from 'src/app/models/usuario';
 })
 export class FeedCardComponent implements OnInit {
 
-  @Input() feed: any;
+  @Input() feed: FeedEntry;
   @Input() hiddenFields: string[];
 
   constructor() { }
