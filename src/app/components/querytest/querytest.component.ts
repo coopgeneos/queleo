@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { RssFirebaseService } from 'src/app/services/rss-firebase.service';
-import { FirebaseFilter, Condition } from 'src/app/models/firebaseFilter';
+import { CategoryFirestoreService } from 'src/app/services/category-firestore.service';
 
 @Component({
   selector: 'app-querytest',
@@ -10,45 +9,37 @@ import { FirebaseFilter, Condition } from 'src/app/models/firebaseFilter';
   styleUrls: ['./querytest.component.css']
 })
 export class QuerytestComponent implements OnInit {
-  
-  noticiasRef: AngularFireList<any>;
-  noticias: Observable<any[]>;
 
-  constructor(public db: AngularFireDatabase, public RssService: RssFirebaseService) {
-    // console.log("Contruyendo QueryTest")
+  items: Observable<any[]>;
+  db: CategoryFirestoreService;
+  private categoriesCollection: AngularFirestoreCollection<any>;
+
+  constructor(db: CategoryFirestoreService) {
+    this.db = db;
   }
 
   ngOnInit() {
-    // console.log("Iniciando QueryTest")
-    this.RssService.findAll({field: 'url', condition: Condition[">="], value: 'https://www.clarin'})
-      .subscribe(
-        data => {
-          // console.log("KOKO", JSON.stringify(data))
-        },
-        error => {},
-        () => {}
-    );
-
-    this.db.list('/rss', ref => 
-      ref.orderByChild('url').startAt('https://www.clarin')
-    ).snapshotChanges().subscribe(
-      data => {
-        let mapa = data.map(elem => elem.payload.val())
-        // console.log(mapa)
-      },
-      error => {},
+    this.db.findAll().subscribe(
+      data => {console.log("init", data)},
+      error => {console.error(error)},
       () => {}
     )
-        
-    
-    // this.db.object('/rss/1').snapshotChanges().subscribe(
-    //   data => {
-    //     console.log("RSS bestia")
-    //     console.log(data)
-    //   },
-    //   error => {},
-    //   () => {}
-    // )
+
+    /* this.categoriesCollection = this.db.collection<any>('rss');
+    this.categoriesCollection.snapshotChanges().subscribe(
+      data => {
+        let cats = data.map(d => {
+          let r = d.payload.doc.data();
+          r.id = d.payload.doc.id;
+          return r;
+        })
+        console.log("datainit", cats)
+      },
+      error => {
+        console.error(error)
+      },
+      () => {}
+    ) */
   }
 
 }

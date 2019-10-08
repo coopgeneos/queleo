@@ -15,13 +15,15 @@ import { FeedListComponent } from './components/feed-list/feed-list.component';
 import { QuerytestComponent } from './components/querytest/querytest.component';
 import { FeedFilterComponent } from './components/feed-filter/feed-filter.component'
 import { SigninComponent } from './components/signin/signin.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 // Services
 import { FeedService } from './services/feed.service';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { SignupComponent } from './components/signup/signup.component';
 import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 import { NgxXml2jsonService } from 'ngx-xml2json';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { CategoryFirestoreService } from 'src/app/services/category-firestore.service'
 
 // Pipes
 import { CapitalizePipe } from './pipes/capitalize.pipe';
@@ -34,14 +36,13 @@ import { environment } from '../environments/environment';
     AppComponent,
     FeedCardComponent,
     FeedListComponent,
- 
-    CapitalizePipe,
-    TranslatorPipe,
-    
     QuerytestComponent, 
     FeedFilterComponent, 
     SigninComponent, 
     SignupComponent, 
+ 
+    CapitalizePipe,
+    TranslatorPipe,
   ],
   imports: [
     BrowserModule,
@@ -56,7 +57,9 @@ import { environment } from '../environments/environment';
     FeedService, 
     AngularFireAuth, 
     AngularFireAuthGuard, 
-    NgxXml2jsonService
+    NgxXml2jsonService,
+    AngularFirestore,
+    CategoryFirestoreService
   ],
   bootstrap: [AppComponent]
 })
