@@ -23,7 +23,9 @@ export class SigninComponent implements OnInit {
 
   login() {
     this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password)
-      .then(() => {this.router.navigate(['/feeds']);})
+      .then(() => {
+        localStorage.setItem("logged", this.email);
+        this.router.navigate(['/feeds']);})
       .catch(function(error) {
         var errorCode = error.code;
         var errorMessage = error.message;

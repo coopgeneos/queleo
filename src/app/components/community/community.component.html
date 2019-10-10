@@ -1,0 +1,65 @@
+<div class="container">
+  <div class="row">
+    <h3>Creador:</h3><p>{{community.owner}}</p>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-6 col-lg-6" style="padding: 20px">
+      <div class="row" style="border-bottom: 1px solid;margin-bottom: 20px;"><h3>Miembros</h3></div>
+
+      <div class="row" *ngFor="let member of community.members">
+        <div class="container">
+          <p style="float:left;">{{member}}</p>
+          <button style="float:right;" type="button" 
+            class="btn btn-danger" aria-label="Left Align" 
+            (click)="removeMember(member)"
+          >x</button>
+        </div>
+      </div>
+
+      <div class="row" style=" border-top: 1px solid; padding-top: 20px; margin-top: 20px">
+        <div class="container">
+          <input style="float:left; width:80%" type="text" [(ngModel)]="newMember" placeholder="Agregue un email"/>
+          <button style="float:right;" (click)="addMember()">Agregar</button>
+          <p>{{member_error}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-12 col-md-6 col-lg-6" style="padding: 20px">
+      <div class="row" style="border-bottom: 1px solid;margin-bottom: 20px;"><h3>RSS</h3></div>
+
+      <div class="row" *ngFor="let rss of community.rss">
+        <div class="container">
+          <p style="float:left;">{{rss.source | capitalize}} {{rss.category | capitalize}}</p>
+          <button style="float:right;" (click)="removeRss(rss)" type="button" class="btn btn-danger" aria-label="Left Align">x</button>
+        </div>
+      </div>
+      
+      <div class="row" style="border-top: 1px solid; padding-top: 20px; margin-top: 20px">
+        <div class="form-group" style="width: 100%;">
+          <label for="selectSource" style="float: left;">Fuente:</label>
+          <input id="selectSource" style="float:left; width: 100%;" type="text" [(ngModel)]="newRss.source" placeholder="Agregue una fuente"/>
+        </div>
+        <div class="form-group" style="width: 100%;">
+          <label for="categorySelect" style="float: left;">Categoría:</label>
+          <select class="form-control" id="categorySelect" (change)="selectCategory($event.target.value)">
+            <option disabled>Seleccione...</option>
+            <option *ngFor="let category of categories" style="float: right;">{{category | capitalize}}</option>
+          </select>
+        </div>
+        <div class="form-group" style="width: 100%;">
+          <label for="selectUrl" style="float: left;">Fuente:</label>
+          <input id="selectUrl" style="float:right; width: 100%;" type="text" [(ngModel)]="newRss.url" placeholder="Agregue una url"/>
+        </div>
+        <button style="float:right; margin-top: 10px" (click)="addRss()">Agregar</button>
+        <p style="margin:auto">{{rss_error}}</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="col-sm-12 col-md-12 col-lg-12" style="border-top: 1px solid; padding-top: 20px; margin-top: 20px">
+    <app-feed-list [rssPath]="rssPath" [sourcesPath]="sourcesPath"></app-feed-list>
+  </div>
+</div>

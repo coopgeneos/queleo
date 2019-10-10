@@ -19,9 +19,9 @@ export class FeedService {
     return new Promise((resolve, reject) => {
       this.http.get(this.CORS_PROXY + rss.url).toPromise()
         .then(xml => {
-          xml =  xml['_body'].replace(/<!\[CDATA\[|\]\]>/g, "");
-          // console.log("XML crudo", xml)
-          let xml_p = this.parser.parseFromString(xml.toString(), 'text/xml');
+          let xml_s = this.repairXML(xml['_body']);
+          // console.log("XML crudo", rss.source, xml_s)
+          let xml_p = this.parser.parseFromString(xml_s, 'text/xml');
           // console.log("XML stringifiado", xml_p)
           let json = this.ngxXml2jsonService.xmlToJson(xml_p);
           // console.log("JSON",JSON.stringify(json))
@@ -31,17 +31,19 @@ export class FeedService {
     });
   }
 
+  repairXML(xml: string) : string {
+    let fixed = xml.replace(/<!\[CDATA\[|\]\]>/g, "");
+    fixed = fixed.toString().replace(/&/g, "&amp;");
+    return fixed;
+  }
+
   parseToRSSJson(json: any, rss: Rss) : FeedEntry[] {
     let items = json.rss.channel.item;
     return items.map(item => {
-      return {
-        title: item.title,
-        description: item.description,
-        link: item.link,
-        pubDate: Date.parse(item.pubDate),
-        creator: item['dc:creator'] ? item['dc:creator'] : rss.source,
-        enclosure: item.enclosure && item.enclosure['@attributes'] ? item.enclosure['@attributes'] : null
-      }
+      let feed = new FeedEntry();
+      feed.init(item);
+      feed.creator = feed.creator ? feed.creator : rss.source
+      return feed;
     });
   }
 }

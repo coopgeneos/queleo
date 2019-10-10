@@ -30,6 +30,9 @@ import { CapitalizePipe } from './pipes/capitalize.pipe';
 import { TranslatorPipe } from './pipes/translator.pipe';
 
 import { environment } from '../environments/environment';
+import { CommunityCardComponent } from './components/community-card/community-card.component';
+import { CommunityListComponent } from './components/community-list/community-list.component';
+import { CommunityComponent } from './components/community/community.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +46,9 @@ import { environment } from '../environments/environment';
  
     CapitalizePipe,
     TranslatorPipe,
+    CommunityCardComponent,
+    CommunityListComponent,
+    CommunityComponent,
   ],
   imports: [
     BrowserModule,

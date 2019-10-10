@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 @Component({
@@ -8,6 +8,7 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class FeedFilterComponent implements OnInit {
   @Output() updateFilter = new EventEmitter();
+  @Input() sourcesPath: string;
 
   filterTitle: string = "";
   categories: any[];
@@ -25,6 +26,8 @@ export class FeedFilterComponent implements OnInit {
   constructor(private firebaseDB: AngularFireDatabase) { }
 
   ngOnInit() {
+    if(!this.sourcesPath) this.sourcesPath = "/sources";
+
     this.loadCategories();
     this.loadSources();
   }
@@ -32,7 +35,7 @@ export class FeedFilterComponent implements OnInit {
   loadCategories() : void {
     this.firebaseDB.list('/categories').snapshotChanges().subscribe(
       data => {
-        this.categories = data.map(elem => {return {name: elem.key, selected: true}});
+        this.categories = data.map(elem => {return {name: elem.payload.val(), selected: true}});
       },
       error => {},
       () => {}
@@ -40,9 +43,9 @@ export class FeedFilterComponent implements OnInit {
   }
 
   loadSources() : void {
-    this.firebaseDB.list('/sources').snapshotChanges().subscribe(
+    this.firebaseDB.list(this.sourcesPath).snapshotChanges().subscribe(
       data => {
-        this.sources = data.map(elem => {return {name: elem.key, selected: true}});
+        this.sources = data.map(elem => {return {name: elem.payload.val(), selected: true}});
       },
       error => {},
       () => {}

@@ -1,0 +1,11 @@
+<div class="card mb-4" style="background-image: url('{{community.image}}');">
+	<div class="card-body">
+		<h2 class="card-title">{{community.name | capitalize}}</h2>
+		<p class="card-text">{{community.description | capitalize}}</p>
+		<a class="btn btn-primary"
+			style="float: right;" 
+			[routerLink]="['/community', community.id]">
+				<i class="fa fa-plus fa-lg"></i>Ver mas...
+		</a>
+	</div>
+</div>

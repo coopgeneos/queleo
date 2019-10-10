@@ -14,6 +14,7 @@ export class AppComponent {
 
   logout(){
     this.afAuth.auth.signOut().then(() => {
+      localStorage.removeItem("logged");
       this.router.navigate(['/signin']);
     });
   }

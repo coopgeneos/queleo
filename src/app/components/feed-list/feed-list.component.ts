@@ -11,6 +11,9 @@ import { Rss } from 'src/app/models/rss';
 })
 export class FeedListComponent implements OnInit {
 
+  @Input() rssPath: string;
+  @Input() sourcesPath: string;
+
   rssList: Rss[];
   feeds: FeedEntry[] = [];
   filteredFeeds: FeedEntry[] = [];
@@ -18,22 +21,22 @@ export class FeedListComponent implements OnInit {
 
   constructor(
     private feedService: FeedService,
-    private firebaseDB: AngularFireDatabase) {  }
+    private firebaseDB: AngularFireDatabase) {  
+     if(!this.rssPath) this.rssPath = '/rssx';
+     if(!this.sourcesPath) this.sourcesPath = null;
+    }
 
   ngOnInit() {
     this.loadRss();
   }
 
   loadRss() {
-    this.firebaseDB.list('/rssx').snapshotChanges().subscribe(
+    this.firebaseDB.list(this.rssPath).snapshotChanges().subscribe(
       data => {
         this.rssList = data.map(elem => {
-          let pl = elem.payload.val();
-          return {
-            source: pl['source'],
-            category: pl['category'],
-            url: pl['url']
-          }
+          let rss = new Rss();
+          rss.init(elem.payload.val())
+          return rss
         });
         this.loadFeeds({order: "desc"});
       },
