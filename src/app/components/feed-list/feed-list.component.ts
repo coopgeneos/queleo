@@ -3,6 +3,7 @@ import { FeedService } from 'src/app/services/feed.service';
 import { FeedEntry } from 'src/app/models/feed-entry';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Rss } from 'src/app/models/rss';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-feed-list',
@@ -19,6 +20,8 @@ export class FeedListComponent implements OnInit {
   filteredFeeds: FeedEntry[] = [];
   hiddenFields: string[] = [];
 
+  loggedUser: User;
+
   constructor(
     private feedService: FeedService,
     private firebaseDB: AngularFireDatabase) {  
@@ -28,6 +31,22 @@ export class FeedListComponent implements OnInit {
 
   ngOnInit() {
     this.loadRss();
+    this.getLoggedUser();
+  }
+
+  getLoggedUser() {
+    this.firebaseDB.list("/users", ref => 
+      ref.orderByChild("email").equalTo(localStorage.getItem("logged"))
+    ).snapshotChanges().subscribe(
+      data => {
+        this.loggedUser = new User();
+        this.loggedUser.init(data[0].payload.val());
+        this.loggedUser.id = data[0].key;
+      },
+      error => {
+        console.error(error)
+      }
+    )
   }
 
   loadRss() {
