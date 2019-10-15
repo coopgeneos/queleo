@@ -1,5 +1,5 @@
 <div class="card mb-4">
-	<img class="card-img-top" src="{{feed.enclosure ? feed.enclosure.url : null}}" alt="No hay imagen" *ngIf="hiddenFields != null && !hiddenFields.includes('image')">
+	<img class="card-img-top" src="{{feed.image ? feed.image : null}}" alt="No hay imagen" *ngIf="hiddenFields != null && !hiddenFields.includes('image')">
 	<div class="card-body">
 		<h2 class="card-title" *ngIf="hiddenFields != null && !hiddenFields.includes('title')">{{feed.title}}</h2>
 		<p class="card-text" *ngIf="hiddenFields != null && !hiddenFields.includes('description')">{{feed.description}}</p>

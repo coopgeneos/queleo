@@ -31,19 +31,72 @@ export class FeedService {
     });
   }
 
-  repairXML(xml: string) : string {
+  private repairXML(xml: string) : string {
     let fixed = xml.replace(/<!\[CDATA\[|\]\]>/g, "");
     fixed = fixed.toString().replace(/&/g, "&amp;");
     return fixed;
   }
 
-  parseToRSSJson(json: any, rss: Rss) : FeedEntry[] {
-    let items = json.rss.channel.item;
-    return items.map(item => {
-      let feed = new FeedEntry();
-      feed.init(item);
-      feed.creator = feed.creator ? feed.creator : rss.source
-      return feed;
-    });
+  private parseToRSSJson(json: any, rss: Rss) : FeedEntry[] {
+    try {
+      let items = this.getItems(json);
+      return items.map(item => {
+        let feed = new FeedEntry();
+        feed.init(item);
+        this.fixFeedEntry(feed, item, rss)
+        return feed;
+      });
+    } catch(err) {
+      throw ` Error parsing: ${rss.source}
+              ${rss.url} 
+              ${err}`;
+    }
+  }
+
+  private getItems(json: any) : any[] {
+    if(json.rss && json.rss.channel && json.rss.channel.item){
+      // console.log(this.getValueOf(json, 'json.rss.channel.item'));
+      return json.rss.channel.item;
+    }
+      
+    if(json.feed && json.feed.entry){
+      // console.log(this.getValueOf(json, 'json.feed.entry'));
+      return json.feed.entry;
+    }
+  }
+
+  private fixFeedEntry(feed: FeedEntry, obj: any, rss: Rss) : void {
+    // Fix creator
+    if(feed.creator == null) {
+      feed.creator = this.getValueOf(obj, 'author.name');
+      feed.creator = feed.creator ? feed.creator : rss.source;
+    } 
+    // Fix pubDate
+    if(feed.pubDate == null) {
+      feed.pubDate = obj['updated'] ? new Date(obj['updated']) : null;
+    }
+    // Fix link
+    if(typeof feed.link != 'string') {
+      feed.link = this.getValueOf(obj, 'link.@attributes.href');
+    }
+    // Fix image
+    if(feed.image == null) {
+      feed.image = this.getValueOf(obj, 'content.div.img.@attributes.src');
+    }
+  }
+
+  private getValueOf(obj: any, prop: string) : any {
+    let props = prop.split(".");
+    let intermediate = 'obj';
+    try {
+      for(let i=0; i<props.length; i++){
+        intermediate = intermediate + `['${props[i]}']`;
+        if(eval(intermediate) === 'undefined')
+          throw `${intermediate} is undefined`
+      }
+      return eval(intermediate)
+    } catch(err) {
+      return null;
+    }
   }
 }

@@ -19,7 +19,7 @@ export class CommunityComponent implements OnInit {
 
   private newRss: Rss;
   private categories: string[];
-  private rss_error: string;
+  private rss_error: string = null;
 
   private rssPath: string;
   private sourcesPath: string;
@@ -71,9 +71,9 @@ export class CommunityComponent implements OnInit {
             this.member_error = "Se agregó el usuario correctamente";
             this.community.members.push(this.newMember);
             this.firebaseDB.object(`/communities/${this.id}/members`).set(this.community.members);
-            this.newMember = "";
+            this.newMember = null;
           } 
-          setTimeout(() => {this.member_error = ""}, 3000)
+          setTimeout(() => {this.member_error = null}, 3000)
         }
       )
   }
@@ -90,7 +90,7 @@ export class CommunityComponent implements OnInit {
     // console.log(!this.newRss, !this.newRss.source, !this.newRss.category, !this.newRss.url)
     if(!this.newRss || !this.newRss.source || !this.newRss.category || !this.newRss.url ) {
       this.rss_error = "El RSS esta mal formado";
-      setTimeout(() => {this.rss_error = ""}, 3000);
+      setTimeout(() => {this.rss_error = null}, 3000);
       return
     }
     let rss = this.community.rss.find(elem => {
@@ -105,7 +105,7 @@ export class CommunityComponent implements OnInit {
       this.newRss = new Rss();
     } else {
       this.rss_error = "El RSS ya existe";
-      setTimeout(() => {this.rss_error = ""}, 3000)
+      setTimeout(() => {this.rss_error = null}, 3000)
     } 
   }
 

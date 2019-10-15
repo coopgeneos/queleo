@@ -21,7 +21,9 @@
         <div class="container">
           <input style="float:left; width:80%" type="text" [(ngModel)]="newMember" placeholder="Agregue un email"/>
           <button style="float:right;" (click)="addMember()">Agregar</button>
-          <p>{{member_error}}</p>
+          <div class="alert alert-danger" style="margin-top: 10%;" *ngIf="member_error != null">
+            <strong>Error!</strong> {{member_error}}.
+          </div>
         </div>
       </div>
     </div>
@@ -53,7 +55,9 @@
           <input id="selectUrl" style="float:right; width: 100%;" type="text" [(ngModel)]="newRss.url" placeholder="Agregue una url"/>
         </div>
         <button style="float:right; margin-top: 10px" (click)="addRss()">Agregar</button>
-        <p style="margin:auto">{{rss_error}}</p>
+        <div class="alert alert-danger" style="margin: auto; font-size: 12px" *ngIf="rss_error != null">
+          <strong>Error!</strong> {{rss_error}}.
+        </div>
       </div>
 
     </div>

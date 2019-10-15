@@ -6,7 +6,7 @@ export class FeedEntry {
   pubDate: Date;
   categories: Array<string>;
   creator: string;
-  enclosure: {};
+  image: string;
 
   constructor() {}
 
@@ -17,7 +17,7 @@ export class FeedEntry {
       this.link = obj.link ? obj.link : null;
       this.pubDate = obj.pubDate ? new Date(obj.pubDate) : null;
       this.creator = obj['dc:creator'] ? obj['dc:creator'] : null;
-      this.enclosure = obj.enclosure && obj.enclosure['@attributes'] ? obj.enclosure['@attributes'] : null;
+      this.image = obj.enclosure && obj.enclosure['@attributes'] ? obj.enclosure['@attributes'] : null;
     } catch(err) {
       throw err;
     }
