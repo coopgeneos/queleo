@@ -19,7 +19,7 @@ export class FeedListComponent implements OnInit {
   feeds: FeedEntry[] = [];
   filteredFeeds: FeedEntry[] = [];
   hiddenFields: string[] = [];
-
+  tagsSeparadosFinal;
   loggedUser: User;
 
   constructor(
@@ -41,6 +41,7 @@ export class FeedListComponent implements OnInit {
       data => {
         this.loggedUser = new User();
         this.loggedUser.init(data[0].payload.val());
+        console.log(data[0].payload.val())
         this.loggedUser.id = data[0].key;
       },
       error => {
@@ -65,7 +66,7 @@ export class FeedListComponent implements OnInit {
       () => {}
     )
   }
-
+  
   loadFeeds(filter: any) {
     this.feeds = [];
 

@@ -1,7 +1,9 @@
 <div class="col-md-8" style="float: left;">
 	<app-feed-card *ngFor="let feed of feeds" 
 		[feed]="feed" 
-		[hiddenFields]="hiddenFields">
+		[hiddenFields]="hiddenFields"
+		[loggedUser]="loggedUser"
+		>
 	</app-feed-card>
 </div>
 

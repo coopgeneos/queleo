@@ -1,13 +1,43 @@
 <div class="card mb-4">
+<<<<<<< HEAD
 	<img class="card-img-top" src="{{feed.image ? feed.image : null}}" alt="No hay imagen" *ngIf="hiddenFields != null && !hiddenFields.includes('image')">
+=======
+	<img class="card-img-top" src="{{feed.enclosure ? feed.enclosure.url : null}}" alt="No hay imagen"
+		*ngIf="hiddenFields != null && !hiddenFields.includes('image')">
+>>>>>>> add to favorites and share
 	<div class="card-body">
 		<h2 class="card-title" *ngIf="hiddenFields != null && !hiddenFields.includes('title')">{{feed.title}}</h2>
-		<p class="card-text" *ngIf="hiddenFields != null && !hiddenFields.includes('description')">{{feed.description}}</p>
+		<p class="card-text" *ngIf="hiddenFields != null && !hiddenFields.includes('description')">{{feed.description}}
+		</p>
 		<a href="{{feed.link}}" target="_blank" class="{{feed.link}}">Ver más &rarr;</a>
 	</div>
-	<div class="card-footer text-muted" *ngIf="hiddenFields != null && !hiddenFields.includes('data')" >
+	<div class="card-footer text-muted" *ngIf="hiddenFields != null && !hiddenFields.includes('data')">
 		{{feed.creator | capitalize}} - {{feed.pubDate | date:'dd-MM-yyyy'}}
-		<button (click)=toFavorites() style="float:right">Guardar</button>
-		<button (click)=share() style="float:right">Compartir</button>
+		<button (click)=viewTags(loggedUser,tags) style="float:right">Agregar a favoritos</button>
+		<button (click)=viewSocialShare(social) style="float:right">Compartir</button>
 	</div>
-</div>
+	<ng-template #tags>
+		<div class="modal-header">
+			<ul>
+				<li *ngFor="let tag of loggedUser.tags; let i = index">
+					<input type="checkbox" class="form-check-input" id="{{tag}}" (click)="selectTag(tag)">
+					{{tag}}
+				</li>
+				<button (click)=addFavorites() style="float:right">Guardar</button><br>
+			</ul><br>
+		</div>
+		<div class="modal-header">
+			<input type="text" class="form-control" id="tags" [(ngModel)]="tagsAdd"><br>
+			<button (click)=addTags() style="float:right">Agregar tags</button>
+		</div>
+	</ng-template>
+	<ng-template #social>
+		<div class="modal-header">
+			<a class="btn btn-primary" href="{{facebook_url}}" target="_blank" style="float:right">Compartir en
+				Facebook</a>
+			<a class="btn btn-primary" href="{{twitter_url}}" target="_blank" style="float:right">Compartir en
+				Twitter</a>
+			<a class="btn btn-primary" href="{{linkedin_url}}" target="_blank" style="float:right">Compartir en
+				LinkedIn</a>
+		</div>
+	</ng-template>

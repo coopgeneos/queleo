@@ -34,6 +34,9 @@ import { CommunityCardComponent } from './components/community-card/community-ca
 import { CommunityListComponent } from './components/community-list/community-list.component';
 import { CommunityComponent } from './components/community/community.component';
 
+import { NgxSocialShareModule } from 'ngx-social-share';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +52,7 @@ import { CommunityComponent } from './components/community/community.component';
     CommunityCardComponent,
     CommunityListComponent,
     CommunityComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -57,7 +61,9 @@ import { CommunityComponent } from './components/community/community.component';
     HttpModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase, 'noticion'),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    NgxSocialShareModule,
+
   ],
   providers: [
     FeedService, 

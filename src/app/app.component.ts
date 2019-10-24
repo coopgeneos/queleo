@@ -7,18 +7,18 @@ import { Router } from '@angular/router';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  
-  constructor( 
+
+  constructor(
     public afAuth: AngularFireAuth,
     private router: Router) { }
 
-  logout(){
+  logout() {
     this.afAuth.auth.signOut().then(() => {
       localStorage.removeItem("logged");
       this.router.navigate(['/signin']);
     });
   }
 
-  ngOnInit() {}
-  
+  ngOnInit() { }
+
 }
